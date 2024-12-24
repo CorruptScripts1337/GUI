@@ -2736,6 +2736,66 @@ do
 			return Textbox
 		end
 		--
+        function Sections:Label(Options)
+            local Properties = Options or {}
+            local Label = {
+                Window = self.Window,
+                Page = self.Page,
+                Section = self,
+                Text = (Properties.text or Properties.Text or "Label Text"),
+                Callback = (Properties.callback or Properties.Callback or function() end),
+                Flag = (Properties.flag or Properties.Flag or Properties.pointer or Properties.Pointer or Library.NextFlag()),
+            }
+        
+            -- // Instances
+            local Holder = Instance.new('TextButton', Options.Side == "Left" and Label.Section.Elements.Left or Options.Side == "Right" and Label.Section.Elements.Right or Label.Section.Elements.Left)
+            local Frame = Instance.new('Frame', Holder)
+            local TextLabel = Instance.new('TextLabel', Holder)
+        
+            -- Insert Instances into the Library
+            do -- Inserts
+                table.insert(Library.Instances, Frame)
+                table.insert(Library.Instances, TextLabel)
+            end
+        
+            -- // Setting up the Properties
+            Holder.Name = "Label"
+            Holder.Size = UDim2.new(1,0,0,30)  -- Adjust size as necessary
+            Holder.BackgroundColor3 = Color3.new(1,1,1)
+            Holder.BackgroundTransparency = 1
+            Holder.Text = ""
+            Holder.TextColor3 = Color3.new(0,0,0)
+            Holder.AutoButtonColor = false
+            Holder.Font = Enum.Font.SourceSans
+            Holder.TextSize = 14
+        
+            Frame.Position = UDim2.new(0,0,0,0)
+            Frame.Size = UDim2.new(1,0,1,0)
+            Frame.BackgroundColor3 = Color3.new(0.0784,0.0784,0.0784)
+            Frame.BorderColor3 = Color3.new(0,0,0)
+        
+            TextLabel.Position = UDim2.new(0,15,0,0)
+            TextLabel.Size = UDim2.new(1,0,1,0)
+            TextLabel.BackgroundColor3 = Color3.new(1,1,1)
+            TextLabel.BackgroundTransparency = 1
+            TextLabel.TextColor3 = Color3.new(0.3059,0.3059,0.3059)
+            TextLabel.FontFace = Library.UIFont
+            TextLabel.TextSize = Library.FontSize
+            TextLabel.ZIndex = 105
+            TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+            TextLabel.Text = Label.Text
+        
+            -- // Set the label text dynamically with a .set function
+            function Label:Set(text)
+                text = type(text) == "string" and text or Label.Text
+                TextLabel.Text = text
+                Label.Callback(text)  -- Invoke the callback with the new text
+            end
+        
+            -- // Return
+            return Label
+        end
+        --        
 		function Sections:Button(Options)
 			local Properties = Options or {}
 			local Button = {
@@ -2816,67 +2876,6 @@ do
 			-- // Return
 			return Button
 		end
-
-    function Sections:Label(Options)
-      local Properties = Options or {}
-      local Label = {
-          Window = self.Window,
-          Page = self.Page,
-          Section = self,
-          Text = (Properties.text or Properties.Text or "Label Text"),
-          Callback = (Properties.callback or Properties.Callback or function() end),
-          Flag = (Properties.flag or Properties.Flag or Properties.pointer or Properties.Pointer or Library.NextFlag()),
-      }
-  
-      -- // Instances
-      local Holder = Instance.new('TextButton', Options.Side == "Left" and Label.Section.Elements.Left or Options.Side == "Right" and Label.Section.Elements.Right or Label.Section.Elements.Left)
-      local Frame = Instance.new('Frame', Holder)
-      local TextLabel = Instance.new('TextLabel', Holder)
-  
-      -- Insert Instances into the Library
-      do -- Inserts
-          table.insert(Library.Instances, Frame)
-          table.insert(Library.Instances, TextLabel)
-      end
-  
-      -- // Setting up the Properties
-      Holder.Name = "Label"
-      Holder.Size = UDim2.new(1,0,0,30)  -- Adjust size as necessary
-      Holder.BackgroundColor3 = Color3.new(1,1,1)
-      Holder.BackgroundTransparency = 1
-      Holder.Text = ""
-      Holder.TextColor3 = Color3.new(0,0,0)
-      Holder.AutoButtonColor = false
-      Holder.Font = Enum.Font.SourceSans
-      Holder.TextSize = 14
-  
-      Frame.Position = UDim2.new(0,0,0,0)
-      Frame.Size = UDim2.new(1,0,1,0)
-      Frame.BackgroundColor3 = Color3.new(0.0784,0.0784,0.0784)
-      Frame.BorderColor3 = Color3.new(0,0,0)
-  
-      TextLabel.Position = UDim2.new(0,15,0,0)
-      TextLabel.Size = UDim2.new(1,0,1,0)
-      TextLabel.BackgroundColor3 = Color3.new(1,1,1)
-      TextLabel.BackgroundTransparency = 1
-      TextLabel.TextColor3 = Color3.new(0.3059,0.3059,0.3059)
-      TextLabel.FontFace = Library.UIFont
-      TextLabel.TextSize = Library.FontSize
-      TextLabel.ZIndex = 105
-      TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-      TextLabel.Text = Label.Text
-  
-      -- // Set the label text dynamically with a .set function
-      function Label:Set(text)
-          text = type(text) == "string" and text or Label.Text
-          TextLabel.Text = text
-          Label.Callback(text)  -- Invoke the callback with the new text
-      end
-  
-      -- // Return
-      return Label
-  end
-
 		--
 		function Sections:Colorpicker(Options)
 			local Properties = Options or {}
