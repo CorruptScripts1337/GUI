@@ -2739,31 +2739,31 @@ do
 			return Textbox
 		end
 		--
-        function Sections:Label(Options)
-            local Properties = Options or {}
-            local Label = {
-                Section = self,
-                Text = Properties.Text or "Label",
-            }
-        
-            -- Instances
-            local Holder = Instance.new('TextLabel', Label.Section.Elements.Left)
-            Holder.Size = UDim2.new(1, 0, 0, 20)
-            Holder.BackgroundColor3 = Color3.new(1, 1, 1)
-            Holder.BackgroundTransparency = 1
-            Holder.Text = Label.Text
-            Holder.TextColor3 = Color3.new(0.3, 0.3, 0.3)
-            Holder.Font = Enum.Font.SourceSans
-            Holder.TextSize = 14
-        
-            -- Methods
-            function Label:SetText(newText)
-                Holder.Text = newText
-            end
-        
-            return Label
-        end
-        --
+	        function Sections:Label(Options)
+	            local Properties = Options or {}
+	            local Label = {
+	                Section = self,
+	                Text = Properties.Text or "Label",
+	            }
+	        
+	            -- Instances
+	            local Holder = Instance.new('TextLabel', Label.Section.Elements.Left)
+	            Holder.Size = UDim2.new(1, 0, 0, 20)
+	            Holder.BackgroundColor3 = Color3.new(1, 1, 1)
+	            Holder.BackgroundTransparency = 1
+	            Holder.Text = Label.Text
+	            Holder.TextColor3 = Color3.new(0.3, 0.3, 0.3)
+	            Holder.Font = Enum.Font.SourceSans
+	            Holder.TextSize = 14
+	        
+	            -- Methods
+	            function Label:SetText(newText)
+	                Holder.Text = newText
+	            end
+	        
+	            return Label
+	        end
+	        --
 		function Sections:Button(Options)
 			local Properties = Options or {}
 			local Button = {
