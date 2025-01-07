@@ -1428,7 +1428,7 @@ do
 				--
 				Library:Connection(game:GetService("UserInputService").InputBegan, function(inp)
 					if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding then
-						if game:GetService("UserInputService"):IsFocused() then
+						if game:GetService("UserInputService"):GetFocusedTextBox() then
 							return
 						end
 						if Keybind.Mode == "Hold" then
@@ -2563,7 +2563,7 @@ do
 			--
 			Library:Connection(game:GetService("UserInputService").InputBegan, function(inp)
 				if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding then
-					if game:GetService("UserInputService"):IsFocused() then
+					if game:GetService("UserInputService"):GetFocusedTextBox() then
 						return
 					end
 					if Keybind.Mode == "Hold" then
