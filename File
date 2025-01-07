@@ -1428,6 +1428,9 @@ do
 				--
 				Library:Connection(game:GetService("UserInputService").InputBegan, function(inp)
 					if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding then
+						if game:GetService("UserInputService"):IsFocused() then
+							return
+						end
 						if Keybind.Mode == "Hold" then
 							if Keybind.Flag then
 								Library.Flags[Keybind.Flag] = true
@@ -2560,6 +2563,9 @@ do
 			--
 			Library:Connection(game:GetService("UserInputService").InputBegan, function(inp)
 				if (inp.KeyCode == Key or inp.UserInputType == Key) and not Keybind.Binding then
+					if game:GetService("UserInputService"):IsFocused() then
+						return
+					end
 					if Keybind.Mode == "Hold" then
 						if Keybind.Flag then
 							Library.Flags[Keybind.Flag] = true
